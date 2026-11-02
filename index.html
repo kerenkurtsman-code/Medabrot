@@ -469,7 +469,7 @@
   function loadCount() {
     var F = window.TRACK_FORM;
     if (!F || !clean(F.sheet)) return;
-    var u = "https://docs.google.com/spreadsheets/d/" + F.sheet + "/gviz/tq?tqx=out:csv&tq=" +
+    var u = "https://docs.google.com/spreadsheets/d/" + F.sheet + "/gviz/tq?tqx=out:csv&headers=1&tq=" +
       encodeURIComponent("select count(A)") + "&x=" + Date.now();
     fetch(u, { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
       var n = parseInt((t.split("\n")[1] || "").replace(/[^\d]/g, ""), 10);
