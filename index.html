@@ -96,6 +96,8 @@
   .frame{position:relative;width:96px;height:96px;flex-shrink:0}
   .frame .blob{position:absolute;inset:0;width:96px;height:96px}
   .frame .ph,.frame img.photo{position:absolute;top:12px;right:12px;width:72px;height:72px;border-radius:50%;object-fit:cover}
+  /* any photo size or shape fills the circle; portraits keep the face (upper part) in view */
+  img.photo{object-fit:cover;object-position:50% 22%;background:#F3F3F3}
   .ph{background:#F3F3F3;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:rgba(88,10,48,.78);padding:10px}
   .ph img{width:36px;height:36px;opacity:.9}
   .who .name{font-size:20px;font-weight:700;line-height:1.25}
@@ -423,7 +425,7 @@
         inner = '<div class="grid">' + people.map(function (p) {
           var blob = BLOBS[blobI++ % BLOBS.length];
           var ph = photoSrc(p[12]);
-          var photo = ph ? '<img class="photo" src="' + esc(ph) + '" alt="' + esc(p[1]) + '">'
+          var photo = ph ? '<img class="photo" src="' + esc(ph) + '" alt="' + esc(p[1]) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + ic + '\';this.style.objectFit=\'contain\';this.style.padding=\'14px\';this.style.boxSizing=\'border-box\'">'
                          : '<div class="ph" style="position:absolute;top:12px;right:12px;width:72px;height:72px;border-radius:50%"><img src="' + ic + '" alt=""></div>';
           var bens = [p[5], p[6], p[7], p[8]].map(clean).filter(Boolean);
           return '<article class="card"><div class="col"><div class="who"><div class="frame"><img class="blob" src="' + blob + '" alt="">' + photo +
