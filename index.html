@@ -14,6 +14,12 @@
      (קובץ > שיתוף > פרסום באינטרנט > כל המסמך > CSV)
      ============================================================ */
   window.SHEET_PUBLISHED_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE28isyNXrkvDAhw27WWjNAlBjnQfKTXC-0o5vzWdUuqSNK3EaZXBnHgrBiw-XK8U-avC0HPVMTZyE/pub?output=csv";
+  // מעקב לחיצות וואטסאפ לאנשי מקצוע (טופס גוגל). כל עוד action ריק – אין מעקב ואין קוד.
+  window.TRACK_FORM = {
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSd8rtQk4V1o3BDvVEtUrEwCtYZ1WhM29DJCa4vzE5CNHS4ocg/formResponse",
+    pro: "entry.1453774205", when: "entry.1404684236", code: "entry.1632397611",
+    sheet: "1bxuGaHEvdgu4_j6P5X5u5vGWWKjJCb_zPnxr_GAqG5Q" // גיליון התשובות – לספירת המספור הרץ
+  };
 </script>
 <style>
   :root{
@@ -110,7 +116,9 @@
   .benefit{display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:500}
   .benefit img{width:18px;height:18px;margin-top:3px;flex-shrink:0}
   .grow{flex-grow:1}
-  .card .two .btn{min-height:48px;font-size:16px;padding:0 10px}
+  .card .two{grid-template-columns:1fr}
+  @media (max-width:560px){#talk-buttons{grid-template-columns:1fr}}
+  .card .two .btn{min-height:48px;font-size:16px;padding:0 14px}
   .list{background:var(--white);border:1px solid var(--line);border-radius:24px;padding:8px 20px}
   .list-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 0;border-bottom:1px solid rgba(88,10,48,.1)}
   .list-row:last-child{border-bottom:0}
@@ -283,7 +291,7 @@
       ["שקיפות","היועצים שלנו עובדים איתנו בשיתוף פעולה, במידה וצרכתם את השירות שלהם אנחנו מתוגמלות על כך.","עין"],
       ["הטבות","אנחנו עושות את המקסימום לקבל הטבות ייחודיות לקהילה שלנו כדי למקסם את הערך עוד יותר, ככה שאם אתן נעזרות בהם יש לנו יתרון לקבל עוד הטבות עבורכן.","נצנוצים"]
     ],
-    texts: [["שדה","ערך"],["הודעת וואטסאפ מוכנה","היי, הגעתי מדף אנשי המקצוע של קהילת מדברות נכון על כסף"]]
+    texts: [["שדה","ערך"],["הודעת וואטסאפ מוכנה","היי, הגעתי אלייך מנבחרת מדברות"]]
   };
 
   /* ---------- helpers ---------- */
@@ -338,11 +346,13 @@
     if (num.charAt(0) === "0") num = "972" + num.slice(1);
     return "https://wa.me/" + num + (msg ? "?text=" + encodeURIComponent(msg) : "");
   }
-  function buttons(wa, form, dark) {
+  function buttons(wa, form, dark, track) {
     var a = dark ? ["btn btn-white", "btn btn-line-white"] : ["btn btn-dark", "btn btn-line"];
     var h = "";
-    if (wa) h += '<a class="' + a[0] + '" href="' + esc(wa) + '" target="_blank" rel="noopener">וואטסאפ</a>';
-    if (form) h += '<a class="' + a[1] + '" href="' + esc(form) + '" target="_blank" rel="noopener">להשאיר פרטים</a>';
+    if (wa) h += '<a class="' + a[0] + '" href="' + esc(wa) + '" target="_blank" rel="noopener"' +
+      (track ? ' data-track-pro="' + esc(track.pro) + '" data-track-num="' + esc(track.num) + '" data-track-msg="' + esc(track.msg) + '"' : "") +
+      '>שלחי וואטסאפ</a>';
+    if (form) h += '<a class="' + a[1] + '" href="' + esc(form) + '" target="_blank" rel="noopener">השאירי פרטים</a>';
     return h;
   }
 
@@ -356,12 +366,13 @@
       if (v) el.textContent = v;
     });
     var msg = T["הודעת וואטסאפ מוכנה"] || "";
+    var proMsg = T["הודעת וואטסאפ לאנשי מקצוע"] || "היי, הגעתי אלייך מנבחרת מדברות";
     var ourWa = waLink(T["הוואטסאפ שלנו"], msg), ourForm = clean(T["הטופס שלנו"]);
     document.getElementById("talk-buttons").innerHTML = buttons(ourWa, ourForm, true) ||
       '<span class="small" style="color:#fff">[הוואטסאפ והטופס שלנו יופיעו כאן]</span>';
     document.getElementById("footer-buttons").innerHTML =
-      (ourWa ? '<a class="btn btn-lime" href="' + esc(ourWa) + '" target="_blank" rel="noopener">וואטסאפ אלינו</a>' : '<a class="btn btn-lime" href="#talk">לדבר איתנו</a>') +
-      (ourForm ? '<a class="btn btn-line-pink" href="' + esc(ourForm) + '" target="_blank" rel="noopener">להשאיר פרטים</a>' : "");
+      (ourWa ? '<a class="btn btn-lime" href="' + esc(ourWa) + '" target="_blank" rel="noopener">שלחי וואטסאפ</a>' : '<a class="btn btn-lime" href="#talk">לדבר איתנו</a>') +
+      (ourForm ? '<a class="btn btn-line-pink" href="' + esc(ourForm) + '" target="_blank" rel="noopener">השאירי פרטים</a>' : "");
     var ourPhoto = photoSrc(T["התמונה שלנו"]);
     if (ourPhoto) {
       document.querySelector("#talk-photo .photo").setAttribute("src", ourPhoto);
@@ -443,13 +454,55 @@
             (bens.length ? '<div class="benefits"><span class="title">ההטבות לחברות הקהילה</span>' + bens.map(function (b) {
               return '<div class="benefit"><img src="assets/glyph-sparkle.png" alt=""><span>' + esc(b) + "</span></div>";
             }).join("") + "</div>" : "") +
-            '<div class="grow"></div><div class="two">' + buttons(waLink(p[10], msg), clean(p[11]), false) + "</div></div></article>";
+            '<div class="grow"></div><div class="two">' + buttons(waLink(p[10], proMsg), clean(p[11]), false, { pro: clean(p[1]), num: clean(p[10]), msg: proMsg }) + "</div></div></article>";
         }).join("") + "</div>";
       }
       return '<section class="sec"><div class="sec-head"><img src="' + ic + '" alt=""><h3>' + esc(title) + "</h3>" + tag + "</div>" + note + inner + "</section>";
     }).join("");
     document.getElementById("sections").innerHTML = html;
   }
+
+  /* ---------- מעקב: כל לחיצה על וואטסאפ לאיש מקצוע נרשמת בגיליון עם קוד פנייה ---------- */
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  // מספור רץ: M1, M2, M3... לפי מספר השורות שכבר נרשמו בגיליון התשובות
+  var trackCount = null;
+  function loadCount() {
+    var F = window.TRACK_FORM;
+    if (!F || !clean(F.sheet)) return;
+    var u = "https://docs.google.com/spreadsheets/d/" + F.sheet + "/gviz/tq?tqx=out:csv&tq=" +
+      encodeURIComponent("select count(A)") + "&x=" + Date.now();
+    fetch(u, { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
+      var n = parseInt((t.split("\n")[1] || "").replace(/[^\d]/g, ""), 10);
+      if (!isNaN(n) && (trackCount === null || n > trackCount)) trackCount = n;
+      else if (trackCount === null && /count/.test(t) && !(t.split("\n")[1] || "").trim()) trackCount = 0;
+    }).catch(function () {});
+  }
+  function newCode() {
+    if (trackCount === null) {
+      var abc = "ABCDEFGHJKMNPQRSTUVWXYZ23456789", s = "";
+      for (var i = 0; i < 4; i++) s += abc.charAt(Math.floor(Math.random() * abc.length));
+      return "M-" + s;
+    }
+    trackCount += 1;
+    return "M" + trackCount;
+  }
+  loadCount();
+  setInterval(loadCount, 30000);
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[data-track-pro]");
+    var F = window.TRACK_FORM;
+    if (!a || !F || !clean(F.action)) return;
+    var code = newCode(), d = new Date();
+    var when = pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() + " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+    a.href = waLink(a.getAttribute("data-track-num"), a.getAttribute("data-track-msg") + " (קוד פנייה: " + code + ")");
+    try {
+      var body = new URLSearchParams();
+      body.append(F.pro, a.getAttribute("data-track-pro"));
+      body.append(F.when, when);
+      body.append(F.code, code);
+      fetch(F.action, { method: "POST", mode: "no-cors", body: body, keepalive: true });
+    } catch (err) {}
+  }, true);
 
   var keys = Object.keys(TABS);
   render(FALLBACK);
