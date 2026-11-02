@@ -124,10 +124,14 @@
   .tscroll{position:relative;overflow-x:auto;background:var(--white);border:1px solid var(--line);border-radius:18px}
   table{width:100%;min-width:680px;border-collapse:collapse;font-size:14px;text-align:right}
   thead tr{background:var(--tint)}
-  th,td{padding:12px 14px;vertical-align:top}
+  th,td{padding:12px 14px;vertical-align:middle}
   th{font-weight:600}
   tbody tr{border-top:1px solid rgba(88,10,48,.1)}
   tbody th{font-weight:700;white-space:nowrap}
+  .co{display:flex;align-items:center;gap:10px}
+  .co-logo{flex:none;width:88px;height:44px;border-radius:10px;background:var(--white);border:1px solid rgba(88,10,48,.12);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .co-logo img{max-width:80px;max-height:36px;width:auto;height:auto;object-fit:contain}
+  .co-logo.empty{border:1.5px dashed rgba(88,10,48,.3);font-size:12px;font-weight:500;color:var(--muted)}
   td.b{font-weight:600}
   td .btn{min-height:44px;font-size:13px;padding:0 14px;border-radius:10px;white-space:nowrap}
   .small{font-size:13px;color:var(--muted)}
@@ -264,7 +268,7 @@
       ["[שם המסלול 3]","[שלב]","[מחיר]","","ידיים","כן"]
     ],
     trading: [
-      ["סוג","שם החברה","עמלות","הפקדת מינימום","מתאים לשלב","הטבות לחברות","קישור לפתיחת חשבון","להציג בדף"],
+      ["סוג","שם החברה","עמלות","הפקדת מינימום","מתאים לשלב","הטבות לחברות","קישור לפתיחת חשבון","להציג בדף","לוגו"],
       ["ברוקר ישראלי","[ברוקר ישראלי 1]","[עמלות]","[סכום]","מתחילות","[הטבות]","","כן"],
       ["ברוקר ישראלי","[ברוקר ישראלי 2]","[עמלות]","[סכום]","פעילות","[הטבות]","","כן"],
       ["ברוקר ישראלי","[ברוקר ישראלי 3]","[עמלות]","[סכום]","מתחילות ופעילות","[הטבות]","","כן"],
@@ -407,8 +411,11 @@
           return '<div class="tgroup"><span class="tgroup-title">' + esc(g.name) + '</span><div class="tscroll"><table><thead><tr>' +
             '<th scope="col">החברה</th><th scope="col">עמלות</th><th scope="col">הפקדת מינימום</th><th scope="col">מתאים לשלב</th><th scope="col">ההטבות לחברות</th><th scope="col"><span class="sr">פתיחת חשבון</span></th></tr></thead><tbody>' +
             g.rows.map(function (r) {
-              var link = clean(r[6]);
-              return '<tr><th scope="row">' + esc(r[1]) + "</th><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td><td>" + esc(r[4]) +
+              var link = clean(r[6]), lg = clean(r[8]);
+              var logo = lg
+                ? '<span class="co-logo"><img src="' + esc(photoSrc(lg)) + '" alt="" loading="lazy" onerror="this.parentNode.className=\'co-logo empty\';this.parentNode.textContent=\'לוגו\'"></span>'
+                : '<span class="co-logo empty">לוגו</span>';
+              return '<tr><th scope="row"><span class="co">' + logo + "<span>" + esc(r[1]) + "</span></span></th><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td><td>" + esc(r[4]) +
                 '</td><td class="b">' + esc(r[5]) + "</td><td>" +
                 (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">לפתיחת חשבון</a>' : "") + "</td></tr>";
             }).join("") + "</tbody></table></div></div>";
