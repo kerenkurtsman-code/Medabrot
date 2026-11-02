@@ -428,7 +428,7 @@
                 : '<span class="co-logo empty">לוגו</span>';
               return '<tr><th scope="row"><span class="co">' + logo + "<span>" + esc(r[1]) + "</span></span></th><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td><td>" + esc(r[4]) +
                 '</td><td class="b">' + esc(r[5]) + "</td><td>" +
-                (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">לפתיחת חשבון</a>' : "") + "</td></tr>";
+                (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener" data-track-acct="' + esc(clean(r[1])) + '">לפתיחת חשבון</a>' : "") + "</td></tr>";
             }).join("") + "</tbody></table></div></div>";
         }).join("");
         var upd = T["תאריך עדכון חשבונות מסחר"];
@@ -470,7 +470,7 @@
     var F = window.TRACK_FORM;
     if (!F || !clean(F.sheet)) return;
     var u = "https://docs.google.com/spreadsheets/d/" + F.sheet + "/gviz/tq?tqx=out:csv&headers=1&tq=" +
-      encodeURIComponent("select count(A)") + "&x=" + Date.now();
+      encodeURIComponent("select count(D) where D starts with 'M'") + "&x=" + Date.now();
     fetch(u, { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
       var n = parseInt((t.split("\n")[1] || "").replace(/[^\d]/g, ""), 10);
       if (!isNaN(n) && (trackCount === null || n > trackCount)) trackCount = n;
@@ -488,20 +488,31 @@
   }
   loadCount();
   setInterval(loadCount, 30000);
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest && e.target.closest("a[data-track-pro]");
-    var F = window.TRACK_FORM;
-    if (!a || !F || !clean(F.action)) return;
-    var code = newCode(), d = new Date();
+  function logClick(who, code) {
+    var F = window.TRACK_FORM, d = new Date();
     var when = pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() + " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
-    a.href = waLink(a.getAttribute("data-track-num"), a.getAttribute("data-track-msg") + " (קוד פנייה: " + code + ")");
     try {
       var body = new URLSearchParams();
-      body.append(F.pro, a.getAttribute("data-track-pro"));
+      body.append(F.pro, who);
       body.append(F.when, when);
       body.append(F.code, code);
       fetch(F.action, { method: "POST", mode: "no-cors", body: body, keepalive: true });
     } catch (err) {}
+  }
+  document.addEventListener("click", function (e) {
+    var F = window.TRACK_FORM;
+    if (!F || !clean(F.action) || !e.target.closest) return;
+    // וואטסאפ לאיש מקצוע – קוד פנייה רץ
+    var a = e.target.closest("a[data-track-pro]");
+    if (a) {
+      var code = newCode();
+      a.href = waLink(a.getAttribute("data-track-num"), a.getAttribute("data-track-msg") + " (קוד פנייה: " + code + ")");
+      logClick(a.getAttribute("data-track-pro"), code);
+      return;
+    }
+    // פתיחת חשבון מסחר – נרשם בלי קוד
+    var t = e.target.closest("a[data-track-acct]");
+    if (t) logClick("חשבון מסחר: " + t.getAttribute("data-track-acct"), "פתיחת חשבון");
   }, true);
 
   var keys = Object.keys(TABS);
