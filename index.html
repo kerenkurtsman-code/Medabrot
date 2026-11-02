@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הנבחרת שלנו – מדברות נכון על כסף</title>
+<meta name="description" content="אנשי ונשות המקצוע שקהילת מדברות נכון על כסף ממליצה עליהם">
+<link rel="icon" href="assets/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* ============================================================
+     ההגדרה היחידה שצריך לשנות:
+     מדביקים כאן את הקישור שמקבלים בגוגל שיטס
+     (קובץ > שיתוף > פרסום באינטרנט > כל המסמך > CSV)
+     ============================================================ */
+  window.SHEET_PUBLISHED_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRE28isyNXrkvDAhw27WWjNAlBjnQfKTXC-0o5vzWdUuqSNK3EaZXBnHgrBiw-XK8U-avC0HPVMTZyE/pub?output=csv";
+</script>
+<style>
+  :root{
+    --burgundy:#580A30; --burgundy-dark:#3A061F; --pink:#FFC6FE; --lime:#DEFFB0; --blue:#5161F0;
+    --tint:#FFF1FF; --tint2:#FFF8FF; --muted:rgba(88,10,48,.8); --line:rgba(88,10,48,.12); --white:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Google Sans',Arial,sans-serif;color:var(--burgundy);background:var(--white);line-height:1.5;text-align:right}
+  a{color:var(--burgundy)} a:hover{color:var(--burgundy-dark)}
+  img{display:block}
+  .wrap{max-width:1040px;margin:0 auto}
+  .pad{padding-inline:clamp(16px,4vw,40px)}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;background:var(--pink);padding-block:24px 56px}
+  .hero-motif{position:absolute;left:-90px;bottom:-110px;width:420px;height:420px;opacity:.09}
+  .hero .wrap{position:relative;display:flex;flex-direction:column;gap:40px}
+  .logos{display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px}
+  .logos .name{font-weight:700;font-size:19px}
+  .logos .sep{width:1px;height:28px;background:rgba(88,10,48,.3)}
+  .logos img{height:30px;width:auto}
+  @media (max-width:480px){.logos .sep{display:none}}
+  .hero-text{display:flex;flex-direction:column;gap:20px;max-width:760px}
+  .tag{align-self:flex-start;font-size:14px;font-weight:600;padding:6px 14px;border-radius:999px}
+  .tag-dark{background:var(--burgundy);color:var(--pink)}
+  h1{margin:0;font-size:clamp(32px,5.6vw,54px);line-height:1.18;font-weight:700;text-wrap:balance}
+  .lead{margin:0;font-size:clamp(17px,2.2vw,20px);max-width:620px;text-wrap:pretty}
+  .row{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:14px;font-weight:600;font-size:17px;text-decoration:none;text-align:center}
+  .btn-dark{background:var(--burgundy);color:var(--white)} .btn-dark:hover{background:var(--burgundy-dark);color:var(--white)}
+  .btn-line{border:1.5px solid var(--burgundy);color:var(--burgundy)}
+  .btn-link{color:var(--burgundy);text-decoration:underline;text-underline-offset:4px;padding:0 12px}
+  .btn-white{background:var(--white);color:var(--burgundy);font-weight:700}
+  .btn-line-white{border:1.5px solid var(--white);color:var(--white)} .btn-line-white:hover{color:var(--white)}
+  .btn-lime{background:var(--lime);color:var(--burgundy);font-weight:700}
+  .btn-line-pink{border:1.5px solid var(--pink);color:var(--pink)} .btn-line-pink:hover{color:var(--pink)}
+
+  /* seal */
+  .seal{padding-block:28px 32px}
+  .seal .wrap{display:flex;flex-direction:column;gap:12px}
+  .seal-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .seal-head h2{margin:0;font-size:20px;font-weight:700}
+  .seal-head span{font-size:14px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 14px 4px 6px;border:0;border-radius:999px;background:var(--tint);color:var(--burgundy);font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+  .chip[aria-expanded="true"]{background:var(--burgundy);color:var(--pink)}
+  .seal-text{margin:0;background:var(--tint);border-radius:14px;padding:12px 16px;font-size:15px}
+
+  /* talk */
+  .talk{padding-bottom:56px}
+  .talk-box{position:relative;overflow:hidden;background:var(--blue);color:var(--white);border-radius:28px;padding:clamp(20px,3vw,32px);display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px}
+  .talk-blob{position:absolute;bottom:-34px;left:-34px;width:80px;height:80px}
+  .talk-photo{position:relative;flex:0 0 auto;width:168px;height:168px}
+  .talk-photo .ph,.talk-photo img.photo{width:168px;height:168px;border-radius:50%;object-fit:cover}
+  .talk-photo .spark{position:absolute;top:-8px;left:-8px;width:44px;height:44px}
+  .talk-text{position:relative;flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:12px}
+  .talk-text h2{margin:0;font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+  .talk-text p{margin:0;font-size:17px}
+  .talk-text .names{font-size:15px;font-weight:600}
+  .tag-white{background:var(--white);color:var(--burgundy)}
+  .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+
+  /* team */
+  .team{background:var(--tint2);padding-block:56px 72px}
+  .team .wrap{display:flex;flex-direction:column;gap:44px}
+  .team-head h2{margin:0;font-size:clamp(26px,3.4vw,32px);line-height:1.2}
+  .team-head p{margin:6px 0 0;font-size:17px;color:var(--muted)}
+  #sections{display:flex;flex-direction:column;gap:44px;min-width:0}
+  .sec,.tgroup,.tscroll,.team .wrap > *{min-width:0;max-width:100%}
+  .sec{display:flex;flex-direction:column;gap:14px}
+  .sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .sec-head img{width:44px;height:44px}
+  .sec-head h3{margin:0;font-size:24px}
+  .tag-blue{background:var(--blue);color:var(--white);font-size:13px;padding:4px 12px}
+  .sec-note{margin:0;font-size:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:16px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-wrap:wrap;gap:18px 28px}
+  .card .col{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:14px}
+  .who{display:flex;align-items:center;gap:14px}
+  .frame{position:relative;width:96px;height:96px;flex-shrink:0}
+  .frame .blob{position:absolute;inset:0;width:96px;height:96px}
+  .frame .ph,.frame img.photo{position:absolute;top:12px;right:12px;width:72px;height:72px;border-radius:50%;object-fit:cover}
+  .ph{background:#F3F3F3;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:rgba(88,10,48,.78);padding:10px}
+  .ph img{width:36px;height:36px;opacity:.9}
+  .who .name{font-size:20px;font-weight:700;line-height:1.25}
+  .who .role{font-size:15px;font-weight:500;color:var(--muted)}
+  .who .live{font-size:13px;color:var(--muted)}
+  .stage{align-self:flex-start;font-size:13px;font-weight:600;background:var(--lime);padding:4px 12px;border-radius:999px}
+  .fit{margin:0;font-size:16px}
+  .benefits{background:var(--burgundy);color:var(--white);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+  .benefits .title{font-size:13px;font-weight:600;color:var(--lime)}
+  .benefit{display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:500}
+  .benefit img{width:18px;height:18px;margin-top:3px;flex-shrink:0}
+  .grow{flex-grow:1}
+  .card .two .btn{min-height:48px;font-size:16px;padding:0 10px}
+  .list{background:var(--white);border:1px solid var(--line);border-radius:24px;padding:8px 20px}
+  .list-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 0;border-bottom:1px solid rgba(88,10,48,.1)}
+  .list-row:last-child{border-bottom:0}
+  .list-row img{width:40px;height:40px;flex-shrink:0}
+  .list-row .txt{flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .list-row .t{font-size:17px;font-weight:700}
+  .list-row .s{font-size:14px;color:var(--muted)}
+  .list-row .btn{min-height:44px;font-size:15px;padding:0 18px}
+  .tgroup{display:flex;flex-direction:column;gap:8px}
+  .tgroup-title{font-size:15px;font-weight:700;color:var(--blue)}
+  .tscroll{position:relative;overflow-x:auto;background:var(--white);border:1px solid var(--line);border-radius:18px}
+  table{width:100%;min-width:680px;border-collapse:collapse;font-size:14px;text-align:right}
+  thead tr{background:var(--tint)}
+  th,td{padding:12px 14px;vertical-align:top}
+  th{font-weight:600}
+  tbody tr{border-top:1px solid rgba(88,10,48,.1)}
+  tbody th{font-weight:700;white-space:nowrap}
+  td.b{font-weight:600}
+  td .btn{min-height:44px;font-size:13px;padding:0 14px;border-radius:10px;white-space:nowrap}
+  .small{font-size:13px;color:var(--muted)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* footer */
+  footer{position:relative;overflow:hidden;background:var(--burgundy);color:var(--white);padding-block:56px 36px}
+  footer .deco1{position:absolute;left:-50px;bottom:-50px;width:120px;height:120px}
+  footer .deco2{position:absolute;left:74px;bottom:64px;width:20px;height:20px}
+  footer .wrap{position:relative;display:flex;flex-direction:column;gap:32px}
+  footer h2{margin:0;font-size:clamp(26px,3.4vw,32px);line-height:1.2;color:var(--pink)}
+  footer .legal{border-top:1px solid rgba(255,198,254,.25);padding-top:22px;display:flex;flex-direction:column;gap:16px}
+  footer .legal p{margin:0;font-size:13px;color:rgba(255,255,255,.8);max-width:760px}
+  footer .brand{display:flex;align-items:center;gap:14px 32px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--pink)}
+  footer .pair{display:inline-flex;align-items:center;gap:10px}
+  footer .brand img{width:40px;height:40px}
+  .notice{background:var(--tint);border-radius:14px;padding:12px 16px;font-size:14px}
+</style>
+</head>
+<body>
+
+<header class="hero pad">
+  <svg class="hero-motif" aria-hidden="true" viewBox="0 0 400 400" fill="#580A30"><circle cx="300" cy="90" r="62"></circle><path d="M40 210 L380 60 L380 180 L150 250 L380 250 L380 380 Z"></path></svg>
+  <div class="wrap">
+    <div class="logos">
+      <span class="name" style="display:inline-flex;align-items:center;gap:8px"><img src="assets/logo-medabrot.svg" alt="" style="width:30px;height:30px">מדברות נכון על כסף</span>
+      <span class="sep" aria-hidden="true"></span>
+      <img src="assets/logo-slogan.png" alt="מועדון משקיעות נכון כסף">
+    </div>
+    <div class="hero-text">
+      <span class="tag tag-dark">מעטפת אנשי המקצוע של הקהילה</span>
+      <h1 data-text="כותרת ראשית">הנבחרת שלנו – נשות ואנשי מקצוע שאנחנו סומכות עליהם עם הכסף שלנו</h1>
+      <p class="lead" data-text="משפט פתיחה">כל אחת ואחד מהם נבחר אישית על ידינו. אם את לא בטוחה למי את צריכה לפנות בשלב הזה, דברי איתנו ואנחנו נכוון אותך.</p>
+      <div class="row">
+        <a class="btn btn-dark" href="#talk">לדבר איתנו</a>
+        <a class="btn btn-link" href="#team">לפגוש את הנבחרת</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="seal pad" aria-labelledby="seal-title">
+  <div class="wrap">
+    <div class="seal-head">
+      <img src="assets/icon-star.png" alt="" width="40" height="40">
+      <h2 id="seal-title">חותם מדברות</h2>
+      <span>ככה אנחנו בוחרות את הנבחרת שלנו</span>
+    </div>
+    <div class="chips" id="seal-chips"></div>
+    <p class="seal-text" id="seal-text" hidden></p>
+  </div>
+</section>
+
+<section class="talk pad" id="talk">
+  <div class="wrap talk-box">
+    <img class="talk-blob" src="assets/blob-lime.png" alt="">
+    <div class="talk-photo" id="talk-photo">
+      <img class="photo" src="images/team.jpg" alt="קרן, שירי ואביב, מנהלות הקהילה">
+      <img class="spark" src="assets/sparkle-pair-burgundy.png" alt="">
+    </div>
+    <div class="talk-text">
+      <span class="tag tag-white">מדברות איתנו</span>
+      <h2 data-text="כותרת תתחילי איתנו">לא בטוחה מאיפה להתחיל? תתחילי איתנו</h2>
+      <p data-text="טקסט תתחילי איתנו">שיחה קצרה איתנו, נבין יחד מה הכי נכון לך עכשיו ולמי כדאי לפנות. בלי לחץ ובלי שאלות טיפשיות.</p>
+      <div class="two" id="talk-buttons"></div>
+    </div>
+  </div>
+</section>
+
+<main class="team pad" id="team">
+  <div class="wrap">
+    <div class="team-head">
+      <h2>הנבחרת, לפי תחום</h2>
+      <p>בכל תחום תמצאי כתוב את הצורך שלך בנקודת זמן זו, כדי שתדעי בדיוק למי לפנות.</p>
+    </div>
+    <div id="sections"></div>
+  </div>
+</main>
+
+<footer class="pad">
+  <img class="deco1" src="assets/blob-blue.png" alt="">
+  <img class="deco2" src="assets/blob-lime.png" alt="">
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;gap:12px;max-width:620px">
+      <h2>עדיין מתלבטת? בשביל זה אנחנו כאן</h2>
+      <div class="row" id="footer-buttons"></div>
+    </div>
+    <div class="legal">
+      <p data-text="גילוי נאות">נבחרת היועצים והפלטפורמות נבחרה על ידינו באופן אישי, ועובדת איתנו בשיתוף פעולה כדי לתת לך את המענה המדויק והטוב ביותר. הבחירה להיעזר בשירותים אלו נעשית מרצונך ועל ידך בלבד, ואין לנו אחריות או קשר מקצועי לשירותים הללו. גילוי נאות: אנחנו מתוגמלות על פניות ושירותים שהועברו דרכנו. זה מה שמאפשר לנו להחזיק את הקהילה ואת הערך שהיא נותנת, ויוצר הדדיות לכל הצדדים.</p>
+      <div class="brand"><span class="pair"><img src="assets/logo-medabrot.svg" alt=""><span>מדברות נכון על כסף</span></span><span class="pair"><img src="assets/logo.png" alt=""><span>מועדון משקיעות נכון כסף</span></span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- tabs in the Google Sheet (gid = tab id) ---------- */
+  var TABS = { pros: 0, sections: 101, services: 102, trading: 103, seal: 104, texts: 105 };
+
+  var ICONS = {
+    "ידיים": "assets/icon-hands.png", "יד": "assets/icon-hand.png", "עין": "assets/icon-eye.png",
+    "כוכב": "assets/icon-star.png", "שמש": "assets/icon-sun.png", "שטר": "assets/icon-cash.png",
+    "נצנוצים": "assets/icon-sparkle.png", "שעון חול": "assets/icon-hourglass.png", "זריחה": "assets/icon-sunrise.png",
+    "חץ למעלה": "assets/icon-chev-up.png", "בית": "assets/icon-house.png"
+  };
+  var BLOBS = ["assets/blob-lime.png", "assets/blob-blue.png", "assets/blob-burgundy.png"];
+
+  /* ---------- built-in copy of the content (used if the sheet can't be reached) ---------- */
+  var FALLBACK = {
+    pros: [
+      ["תחום","שם","מקצוע","מתאים לשלב","משפט קצר","הטבה 1","הטבה 2","הטבה 3","הטבה 4","העבירה לייב בקהילה","וואטסאפ (מספר)","קישור לטופס","תמונה","להציג בדף"],
+      ["פנסיה וביטוחים","[שם]","מתכננת פנסיונית","[למשל: לא בדקתי את הפנסיה אף פעם]","[משפט קצר: מה היא עושה איתך]","[הטבה 1]","[הטבה 2]","","","לא","","","","כן"],
+      ["פנסיה וביטוחים","[שם]","סוכנת ביטוח","[למשל: רוצה לבדוק שאני לא משלמת כפול]","[משפט קצר: מה היא עושה איתך]","[הטבה]","","","","לא","","","","כן"],
+      ["משכנתאות והלוואות","[שם]","יועצת משכנתאות","[למשל: לפני משכנתא, מחזור או הלוואה]","[משפט קצר: מה היא עושה איתך]","[הטבה 1]","[הטבה 2]","[הטבה 3]","","כן","","","","כן"],
+      ["רו\"ח ומיסוי","[שם]","רו\"ח ישראלי","[למשל: דוח שנתי, החזרי מס, מס על השקעות בישראל]","[משפט קצר]","[הטבה]","","","","לא","","","","כן"],
+      ["רו\"ח ומיסוי","[שם]","רו\"ח אמריקאי","[למשל: אזרחות אמריקאית, דיווח ל-IRS]","[משפט קצר]","[הטבה]","","","","לא","","","","כן"],
+      ["השקעות נדל\"ן בישראל","[שם]","[מקצוע מדויק]","[למשל: לפני דירה ראשונה להשקעה]","[משפט קצר: מה היא עושה איתך]","[הטבה 1]","[הטבה 2]","","","לא","","","","כן"]
+    ],
+    sections: [
+      ["תחום","סוג תצוגה","אייקון","להציג בדף"],
+      ["סדר פיננסי איתנו","המסלולים שלנו","ידיים","כן"],
+      ["פנסיה וביטוחים","אנשי מקצוע","שעון חול","כן"],
+      ["משכנתאות והלוואות","אנשי מקצוע","שטר","כן"],
+      ["רו\"ח ומיסוי","אנשי מקצוע","עין","כן"],
+      ["השקעות נדל\"ן בישראל","אנשי מקצוע","בית","כן"],
+      ["חשבונות מסחר","חשבונות מסחר","חץ למעלה","כן"]
+    ],
+    services: [
+      ["שם המסלול","מתאים לשלב","מחיר","קישור לפרטים","אייקון","להציג בדף"],
+      ["[שם המסלול 1]","[שלב]","[מחיר]","","שמש","כן"],
+      ["[שם המסלול 2]","[שלב]","[מחיר]","","כוכב","כן"],
+      ["[שם המסלול 3]","[שלב]","[מחיר]","","ידיים","כן"]
+    ],
+    trading: [
+      ["סוג","שם החברה","עמלות","הפקדת מינימום","מתאים לשלב","הטבות לחברות","קישור לפתיחת חשבון","להציג בדף"],
+      ["ברוקר ישראלי","[ברוקר ישראלי 1]","[עמלות]","[סכום]","מתחילות","[הטבות]","","כן"],
+      ["ברוקר ישראלי","[ברוקר ישראלי 2]","[עמלות]","[סכום]","פעילות","[הטבות]","","כן"],
+      ["ברוקר ישראלי","[ברוקר ישראלי 3]","[עמלות]","[סכום]","מתחילות ופעילות","[הטבות]","","כן"],
+      ["ברוקר אמריקאי","[ברוקר 1]","[עמלות]","[סכום]","מתחילות","[הטבות]","","כן"],
+      ["ברוקר אמריקאי","[ברוקר 2]","[עמלות]","[סכום]","פעילות","[הטבות]","","כן"]
+    ],
+    seal: [
+      ["כותרת","טקסט","אייקון"],
+      ["הכרות אישית","אנחנו דואגות להכיר כל אחת ואחד מהיועצים שלנו, לשאול אותם את השאלות הנכונות ולוודא שיתנו את המענה הכי אישי ונכון עבור הקהילה שלנו.","ידיים"],
+      ["המלצה אישית","היועצים שלנו הגיעו מניסיון אישי שלנו מולם או מהמלצות והיכרות אישית או בדיקות מעמיקות.","יד"],
+      ["בקרת איכות","אנחנו אוספות פידבקים ומידע על החוויה שלכן מהיועצים שלנו כדי לוודא שאתן מקבלות את המענה שאנחנו מצפות לו.","שמש"],
+      ["שקיפות","היועצים שלנו עובדים איתנו בשיתוף פעולה, במידה וצרכתם את השירות שלהם אנחנו מתוגמלות על כך.","עין"],
+      ["הטבות","אנחנו עושות את המקסימום לקבל הטבות ייחודיות לקהילה שלנו כדי למקסם את הערך עוד יותר, ככה שאם אתן נעזרות בהם יש לנו יתרון לקבל עוד הטבות עבורכן.","נצנוצים"]
+    ],
+    texts: [["שדה","ערך"],["הודעת וואטסאפ מוכנה","היי, הגעתי מדף אנשי המקצוע של קהילת מדברות נכון על כסף"]]
+  };
+
+  /* ---------- helpers ---------- */
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function clean(s) { return String(s == null ? "" : s).trim(); }
+  function shown(v) { return clean(v) !== "לא"; }
+  function icon(name) { return ICONS[clean(name)] || ICONS["כוכב"]; }
+  function isUrl(s) { return /^https?:\/\//i.test(clean(s)); }
+  function photoSrc(s) { s = clean(s); if (!s) return ""; return isUrl(s) ? s : "images/" + s; }
+
+  function parseCSV(text) {
+    var rows = [], row = [], cell = "", q = false, i, ch;
+    text = text.replace(/^﻿/, "");
+    for (i = 0; i < text.length; i++) {
+      ch = text[i];
+      if (q) {
+        if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else { q = false; } }
+        else cell += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+      else if (ch !== "\r") cell += ch;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  function body(rows) { return rows.slice(1).filter(function (r) { return r.some(function (c) { return clean(c) !== ""; }); }); }
+
+  function tabUrl(gid) {
+    var base = clean(window.SHEET_PUBLISHED_URL);
+    if (!base) return null;
+    base = base.split("?")[0].replace(/\/pubhtml$/, "/pub");
+    return base + "?gid=" + gid + "&single=true&output=csv&t=" + Date.now();
+  }
+  function load(key) {
+    var url = tabUrl(TABS[key]);
+    if (!url) return Promise.resolve(FALLBACK[key]);
+    return fetch(url, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(parseCSV)
+      .catch(function () { return FALLBACK[key]; });
+  }
+
+  /* ---------- rendering ---------- */
+  function waLink(num, msg) {
+    num = clean(num).replace(/[^\d]/g, "");
+    if (!num) return "";
+    if (num.charAt(0) === "0") num = "972" + num.slice(1);
+    return "https://wa.me/" + num + (msg ? "?text=" + encodeURIComponent(msg) : "");
+  }
+  function buttons(wa, form, dark) {
+    var a = dark ? ["btn btn-white", "btn btn-line-white"] : ["btn btn-dark", "btn btn-line"];
+    var h = "";
+    if (wa) h += '<a class="' + a[0] + '" href="' + esc(wa) + '" target="_blank" rel="noopener">וואטסאפ</a>';
+    if (form) h += '<a class="' + a[1] + '" href="' + esc(form) + '" target="_blank" rel="noopener">להשאיר פרטים</a>';
+    return h;
+  }
+
+  function render(d) {
+    var T = {};
+    body(d.texts).forEach(function (r) { T[clean(r[0])] = clean(r[1]); });
+
+    // texts from the sheet
+    document.querySelectorAll("[data-text]").forEach(function (el) {
+      var v = T[el.getAttribute("data-text")];
+      if (v) el.textContent = v;
+    });
+    var msg = T["הודעת וואטסאפ מוכנה"] || "";
+    var ourWa = waLink(T["הוואטסאפ שלנו"], msg), ourForm = clean(T["הטופס שלנו"]);
+    document.getElementById("talk-buttons").innerHTML = buttons(ourWa, ourForm, true) ||
+      '<span class="small" style="color:#fff">[הוואטסאפ והטופס שלנו יופיעו כאן]</span>';
+    document.getElementById("footer-buttons").innerHTML =
+      (ourWa ? '<a class="btn btn-lime" href="' + esc(ourWa) + '" target="_blank" rel="noopener">וואטסאפ אלינו</a>' : '<a class="btn btn-lime" href="#talk">לדבר איתנו</a>') +
+      (ourForm ? '<a class="btn btn-line-pink" href="' + esc(ourForm) + '" target="_blank" rel="noopener">להשאיר פרטים</a>' : "");
+    var ourPhoto = photoSrc(T["התמונה שלנו"]);
+    if (ourPhoto) {
+      document.querySelector("#talk-photo .photo").setAttribute("src", ourPhoto);
+    }
+
+    // seal
+    var seal = body(d.seal);
+    var chips = document.getElementById("seal-chips"), sealText = document.getElementById("seal-text");
+    chips.innerHTML = seal.map(function (r, i) {
+      return '<button type="button" class="chip" aria-expanded="false" aria-controls="seal-text" data-i="' + i + '">' +
+        '<img src="' + icon(r[2]) + '" alt="" width="32" height="32"><span>' + esc(r[0]) + "</span></button>";
+    }).join("");
+    chips.onclick = function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      var open = b.getAttribute("aria-expanded") === "true";
+      chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-expanded", "false"); });
+      if (open) { sealText.hidden = true; return; }
+      b.setAttribute("aria-expanded", "true");
+      var r = seal[+b.getAttribute("data-i")];
+      sealText.innerHTML = "<strong>" + esc(r[0]) + ":</strong> " + esc(r[1]);
+      sealText.hidden = false;
+    };
+
+    // sections
+    var pros = body(d.pros).filter(function (r) { return shown(r[13]); });
+    var services = body(d.services).filter(function (r) { return shown(r[5]); });
+    var trading = body(d.trading).filter(function (r) { return shown(r[7]); });
+    var blobI = 0;
+    var html = body(d.sections).filter(function (r) { return shown(r[3]); }).map(function (s) {
+      var title = clean(s[0]), type = clean(s[1]), ic = icon(s[2]);
+      var inner = "", tag = "", note = "";
+      if (type === "המסלולים שלנו") {
+        inner = '<div class="list">' + services.map(function (v) {
+          var link = clean(v[3]);
+          return '<div class="list-row"><img src="' + icon(v[4]) + '" alt=""><div class="txt"><span class="t">' + esc(v[0]) +
+            '</span><span class="s">מתאים לשלב: ' + esc(v[1]) + (clean(v[2]) ? " · " + esc(v[2]) : "") + "</span></div>" +
+            (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">לפרטים</a>' : "") + "</div>";
+        }).join("") + "</div>";
+      } else if (type === "חשבונות מסחר") {
+        var groups = [];
+        trading.forEach(function (r) {
+          var g = groups.filter(function (x) { return x.name === clean(r[0]); })[0];
+          if (!g) { g = { name: clean(r[0]), rows: [] }; groups.push(g); }
+          g.rows.push(r);
+        });
+        inner = groups.map(function (g) {
+          return '<div class="tgroup"><span class="tgroup-title">' + esc(g.name) + '</span><div class="tscroll"><table><thead><tr>' +
+            '<th scope="col">החברה</th><th scope="col">עמלות</th><th scope="col">הפקדת מינימום</th><th scope="col">מתאים לשלב</th><th scope="col">ההטבות לחברות</th><th scope="col"><span class="sr">פתיחת חשבון</span></th></tr></thead><tbody>' +
+            g.rows.map(function (r) {
+              var link = clean(r[6]);
+              return '<tr><th scope="row">' + esc(r[1]) + "</th><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td><td>" + esc(r[4]) +
+                '</td><td class="b">' + esc(r[5]) + "</td><td>" +
+                (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">לפתיחת חשבון</a>' : "") + "</td></tr>";
+            }).join("") + "</tbody></table></div></div>";
+        }).join("");
+        var upd = T["תאריך עדכון חשבונות מסחר"];
+        if (upd) inner += '<span class="small">הנתונים נכונים ל-' + esc(upd) + ".</span>";
+      } else {
+        var people = pros.filter(function (p) { return clean(p[0]) === title; });
+        if (!people.length) return "";
+        if (people.length > 1) {
+          tag = '<span class="tag tag-blue">' + people.length + " אנשי מקצוע</span>";
+          note = '<p class="sec-note">כל איש מקצוע כאן מתאים למצב אחר. בחרי לפי מה שמתאר אותך:</p>';
+        }
+        inner = '<div class="grid">' + people.map(function (p) {
+          var blob = BLOBS[blobI++ % BLOBS.length];
+          var ph = photoSrc(p[12]);
+          var photo = ph ? '<img class="photo" src="' + esc(ph) + '" alt="' + esc(p[1]) + '">'
+                         : '<div class="ph" style="position:absolute;top:12px;right:12px;width:72px;height:72px;border-radius:50%"><img src="' + ic + '" alt=""></div>';
+          var bens = [p[5], p[6], p[7], p[8]].map(clean).filter(Boolean);
+          return '<article class="card"><div class="col"><div class="who"><div class="frame"><img class="blob" src="' + blob + '" alt="">' + photo +
+            '</div><div><div class="name">' + esc(p[1]) + '</div><div class="role">' + esc(p[2]) + "</div>" +
+            (clean(p[9]) === "כן" ? '<div class="live">העבירה לייב בקהילה</div>' : "") + "</div></div>" +
+            (clean(p[3]) ? '<span class="stage">מתאים ל: ' + esc(p[3]) + "</span>" : "") +
+            (clean(p[4]) ? '<p class="fit">' + esc(p[4]) + "</p>" : "") + '</div><div class="col">' +
+            (bens.length ? '<div class="benefits"><span class="title">ההטבות לחברות הקהילה</span>' + bens.map(function (b) {
+              return '<div class="benefit"><img src="assets/glyph-sparkle.png" alt=""><span>' + esc(b) + "</span></div>";
+            }).join("") + "</div>" : "") +
+            '<div class="grow"></div><div class="two">' + buttons(waLink(p[10], msg), clean(p[11]), false) + "</div></div></article>";
+        }).join("") + "</div>";
+      }
+      return '<section class="sec"><div class="sec-head"><img src="' + ic + '" alt=""><h3>' + esc(title) + "</h3>" + tag + "</div>" + note + inner + "</section>";
+    }).join("");
+    document.getElementById("sections").innerHTML = html;
+  }
+
+  var keys = Object.keys(TABS);
+  render(FALLBACK);
+  if (clean(window.SHEET_PUBLISHED_URL)) {
+    Promise.all(keys.map(load)).then(function (res) {
+      var d = {}; keys.forEach(function (k, i) { d[k] = res[i]; }); render(d);
+    });
+  }
+})();
+</script>
+</body>
+</html>
