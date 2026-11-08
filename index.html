@@ -441,7 +441,7 @@
     document.getElementById("products-grid").innerHTML = prods.map(function (r) {
       var name = clean(r[0]), desc = clean(r[1]), price = clean(r[2]), comm = clean(r[3]), club = clean(r[4]),
           link = clean(r[5]), img = clean(r[6]);
-      var meta = (price ? '<span class="reg' + (club || comm ? " cut" : "") + '">' + esc(price) + "</span>" : "") +
+      var meta = (price ? '<span class="reg">' + esc(price) + "</span>" : "") +
         (comm ? '<span class="club comm">לחברות הקהילה: ' + esc(comm) + "</span>" : "") +
         (club ? '<span class="club">לחברות המועדון: ' + esc(club) + "</span>" : "");
       return '<article class="prod">' +
