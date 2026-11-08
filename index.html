@@ -126,6 +126,12 @@
   .list-row .txt{flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:2px}
   .list-row .t{font-size:17px;font-weight:700}
   .list-row .s{font-size:14px;color:var(--muted)}
+  .list-row .meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:6px;font-size:14px}
+  .list-row .meta .m{font-weight:600}
+  .list-row .meta .club{font-size:13px;font-weight:700;background:var(--lime);padding:3px 12px;border-radius:999px}
+  .list-row .meta .club{background:var(--pink)}
+  .list-row .meta .club.comm{background:var(--lime)}
+  .list-row .meta .reg.cut{text-decoration:line-through;color:var(--muted)}
   .list-row .btn{min-height:44px;font-size:15px;padding:0 18px}
   .tgroup{display:flex;flex-direction:column;gap:8px}
   .tgroup-title{font-size:15px;font-weight:700;color:var(--blue)}
@@ -270,7 +276,7 @@
       ["חשבונות מסחר","חשבונות מסחר","חץ למעלה","כן"]
     ],
     services: [
-      ["שם המסלול","מתאים לשלב","מחיר","קישור לפרטים","אייקון","להציג בדף"],
+      ["שם המסלול","מתאים לשלב","מחיר","קישור לפרטים","אייקון","להציג בדף","מספר מפגשים","מחיר לחברות המועדון","מחיר לחברות הקהילה"],
       ["[שם המסלול 1]","[שלב]","[מחיר]","","שמש","כן"],
       ["[שם המסלול 2]","[שלב]","[מחיר]","","כוכב","כן"],
       ["[שם המסלול 3]","[שלב]","[מחיר]","","ידיים","כן"]
@@ -406,9 +412,14 @@
       var inner = "", tag = "", note = "";
       if (type === "המסלולים שלנו") {
         inner = '<div class="list">' + services.map(function (v) {
-          var link = clean(v[3]);
+          var link = clean(v[3]), meet = clean(v[6]), price = clean(v[2]), club = clean(v[7]), comm = clean(v[8]);
+          if (/^\d+$/.test(meet)) meet = meet === "1" ? "מפגש אחד" : meet + " מפגשים";
+          var meta = (meet ? '<span class="m">' + esc(meet) + "</span>" : "") +
+            (price ? '<span class="reg' + (club || comm ? " cut" : "") + '">' + esc(price) + "</span>" : "") +
+            (comm ? '<span class="club comm">לחברות הקהילה: ' + esc(comm) + "</span>" : "") +
+            (club ? '<span class="club">לחברות המועדון: ' + esc(club) + "</span>" : "");
           return '<div class="list-row"><img src="' + icon(v[4]) + '" alt=""><div class="txt"><span class="t">' + esc(v[0]) +
-            '</span><span class="s">מתאים לשלב: ' + esc(v[1]) + (clean(v[2]) ? " · " + esc(v[2]) : "") + "</span></div>" +
+            '</span><span class="s">' + esc(v[1]) + "</span>" + (meta ? '<span class="meta">' + meta + "</span>" : "") + "</div>" +
             (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">לפרטים</a>' : "") + "</div>";
         }).join("") + "</div>";
       } else if (type === "חשבונות מסחר") {
