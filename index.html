@@ -18,7 +18,7 @@
   window.TRACK_FORM = {
     action: "https://docs.google.com/forms/d/e/1FAIpQLSd8rtQk4V1o3BDvVEtUrEwCtYZ1WhM29DJCa4vzE5CNHS4ocg/formResponse",
     pro: "entry.1453774205", when: "entry.1404684236", code: "entry.1632397611",
-    sheet: "1bxuGaHEvdgu4_j6P5X5u5vGWWKjJCb_zPnxr_GAqG5Q" // גיליון התשובות – לספירת המספור הרץ
+    sheet: "152f856it_LEzzE9bKlpKrsm3TA111p1kmSu2Ie5MVKU" // גיליון "מונה קודי פנייה" הציבורי – מכיל רק את מספר הקודים, לספירת המספור הרץ
   };
   // טופס "השארת פרטים" משותף לכל היועצים. הדף ממלא בו לבד את שם היועץ/ת.
   // מי שיש לו טופס משלו בעמודה "קישור לטופס" – ייפתח הטופס שלו.
@@ -542,7 +542,7 @@
     var F = window.TRACK_FORM;
     if (!F || !clean(F.sheet)) return;
     var u = "https://docs.google.com/spreadsheets/d/" + F.sheet + "/gviz/tq?tqx=out:csv&headers=1&tq=" +
-      encodeURIComponent("select count(D) where D starts with 'M'") + "&x=" + Date.now();
+      encodeURIComponent("select A") + "&x=" + Date.now();
     fetch(u, { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
       var n = parseInt((t.split("\n")[1] || "").replace(/[^\d]/g, ""), 10);
       if (!isNaN(n) && (trackCount === null || n > trackCount)) trackCount = n;
