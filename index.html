@@ -394,7 +394,7 @@
       (track ? ' data-track-pro="' + esc(track.pro) + '" data-track-num="' + esc(track.num) + '" data-track-msg="' + esc(track.msg) + '"' : "") +
       '>שלחי וואטסאפ</a>';
     if (form) h += '<a class="' + a[1] + '" href="' + esc(form) + '" target="_blank" rel="noopener"' +
-      (track ? ' data-track-lead="' + esc(track.pro) + '"' : "") + '>השאירי פרטים</a>';
+      (track ? ' data-track-lead="' + esc(track.pro) + '"' : "") + ">" + (track ? "תחזרו אליי לשיחה" : "שנחזור אלייך?") + "</a>";
     return h;
   }
   function leadForm(own, who) {
@@ -419,7 +419,7 @@
       '<span class="small" style="color:#fff">[הוואטסאפ והטופס שלנו יופיעו כאן]</span>';
     document.getElementById("footer-buttons").innerHTML =
       (ourWa ? '<a class="btn btn-lime" href="' + esc(ourWa) + '" target="_blank" rel="noopener">שלחי וואטסאפ</a>' : '<a class="btn btn-lime" href="#talk">לדבר איתנו</a>') +
-      (ourForm ? '<a class="btn btn-line-pink" href="' + esc(ourForm) + '" target="_blank" rel="noopener">השאירי פרטים</a>' : "");
+      (ourForm ? '<a class="btn btn-line-pink" href="' + esc(ourForm) + '" target="_blank" rel="noopener">שנחזור אלייך?</a>' : "");
     var ourPhoto = photoSrc(T["התמונה שלנו"]);
     if (ourPhoto) {
       document.querySelector("#talk-photo .photo").setAttribute("src", ourPhoto);
