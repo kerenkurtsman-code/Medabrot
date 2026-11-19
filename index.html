@@ -20,6 +20,9 @@
     pro: "entry.1453774205", when: "entry.1404684236", code: "entry.1632397611",
     sheet: "1bxuGaHEvdgu4_j6P5X5u5vGWWKjJCb_zPnxr_GAqG5Q" // גיליון התשובות – לספירת המספור הרץ
   };
+  // טופס "השארת פרטים" משותף לכל היועצים. הדף ממלא בו לבד את שם היועץ/ת.
+  // מי שיש לו טופס משלו בעמודה "קישור לטופס" – ייפתח הטופס שלו.
+  window.LEAD_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSd3CeKXzcq-kWBM2IKI2JEB4EEiy7MdOOkQhg1_kO5IPuGkiw/viewform?usp=pp_url&entry.1976349015=";
 </script>
 <style>
   :root{
@@ -390,8 +393,14 @@
     if (wa) h += '<a class="' + a[0] + '" href="' + esc(wa) + '" target="_blank" rel="noopener"' +
       (track ? ' data-track-pro="' + esc(track.pro) + '" data-track-num="' + esc(track.num) + '" data-track-msg="' + esc(track.msg) + '"' : "") +
       '>שלחי וואטסאפ</a>';
-    if (form) h += '<a class="' + a[1] + '" href="' + esc(form) + '" target="_blank" rel="noopener">השאירי פרטים</a>';
+    if (form) h += '<a class="' + a[1] + '" href="' + esc(form) + '" target="_blank" rel="noopener"' +
+      (track ? ' data-track-lead="' + esc(track.pro) + '"' : "") + '>השאירי פרטים</a>';
     return h;
+  }
+  function leadForm(own, who) {
+    own = clean(own);
+    if (own) return own;
+    return clean(window.LEAD_FORM) ? window.LEAD_FORM + encodeURIComponent(who) : "";
   }
 
   function render(d) {
@@ -405,7 +414,7 @@
     });
     var msg = T["הודעת וואטסאפ מוכנה"] || "";
     var proMsg = T["הודעת וואטסאפ לאנשי מקצוע"] || "היי, הגעתי אלייך מנבחרת מדברות";
-    var ourWa = waLink(T["הוואטסאפ שלנו"], msg), ourForm = clean(T["הטופס שלנו"]);
+    var ourWa = waLink(T["הוואטסאפ שלנו"], msg), ourForm = leadForm(T["הטופס שלנו"], "קהילת מדברות – תכוונו אותי");
     document.getElementById("talk-buttons").innerHTML = buttons(ourWa, ourForm, true) ||
       '<span class="small" style="color:#fff">[הוואטסאפ והטופס שלנו יופיעו כאן]</span>';
     document.getElementById("footer-buttons").innerHTML =
@@ -517,7 +526,7 @@
             (bens.length ? '<div class="benefits"><span class="title">ההטבות לחברות הקהילה</span>' + bens.map(function (b) {
               return '<div class="benefit"><img src="assets/glyph-sparkle.png" alt=""><span>' + esc(b) + "</span></div>";
             }).join("") + "</div>" : "") +
-            '<div class="grow"></div><div class="two">' + buttons(waLink(p[10], proMsg), clean(p[11]), false, { pro: clean(p[1]), num: clean(p[10]), msg: proMsg }) + "</div></div></article>";
+            '<div class="grow"></div><div class="two">' + buttons(waLink(p[10], proMsg), leadForm(p[11], clean(p[1])), false, { pro: clean(p[1]), num: clean(p[10]), msg: proMsg }) + "</div></div></article>";
         }).join("") + "</div>";
       }
       return '<section class="sec"><div class="sec-head"><img src="' + ic + '" alt=""><h3>' + esc(title) + "</h3>" + tag + "</div>" + note + inner + "</section>";
@@ -576,6 +585,9 @@
     // פתיחת חשבון מסחר – נרשם בלי קוד
     var t = e.target.closest("a[data-track-acct]");
     if (t) { logClick("חשבון מסחר: " + t.getAttribute("data-track-acct"), "פתיחת חשבון"); return; }
+    // השארת פרטים ליועץ/ת – נרשם בלי קוד
+    var ld = e.target.closest("a[data-track-lead]");
+    if (ld) { logClick(ld.getAttribute("data-track-lead"), "השארת פרטים"); return; }
     // רכישת מוצר – נרשם בלי קוד
     var pr = e.target.closest("a[data-track-prod]");
     if (pr) logClick("מוצר: " + pr.getAttribute("data-track-prod"), "רכישה");
