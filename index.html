@@ -22,7 +22,7 @@
   };
   // טופס "השארת פרטים" משותף לכל היועצים. הדף ממלא בו לבד את שם היועץ/ת.
   // מי שיש לו טופס משלו בעמודה "קישור לטופס" – ייפתח הטופס שלו.
-  window.LEAD_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSd3CeKXzcq-kWBM2IKI2JEB4EEiy7MdOOkQhg1_kO5IPuGkiw/viewform?usp=pp_url&entry.1976349015=";
+  window.LEAD_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSd3CeKXzcq-kWBM2IKI2JEB4EEiy7MdOOkQhg1_kO5IPuGkiw/viewform?usp=pp_url&entry.366873625=";
 </script>
 <style>
   :root{
@@ -166,6 +166,8 @@
   .co-logo img{max-width:80px;max-height:36px;width:auto;height:auto;object-fit:contain}
   .co-logo.empty{border:1.5px dashed rgba(88,10,48,.3);font-size:12px;font-weight:500;color:var(--muted)}
   td.b{font-weight:600}
+  td .star{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+  td .star img{width:22px;height:22px;flex-shrink:0}
   td .btn{min-height:44px;font-size:13px;padding:0 14px;border-radius:10px;white-space:nowrap}
   .small{font-size:13px;color:var(--muted)}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -311,7 +313,7 @@
       ["[שם המסלול 3]","[שלב]","[מחיר]","","ידיים","כן"]
     ],
     trading: [
-      ["סוג","שם החברה","עמלות","הפקדת מינימום","מתאים לשלב","הטבות לחברות","קישור לפתיחת חשבון","להציג בדף","לוגו"],
+      ["סוג","שם החברה","עמלות","הפקדת מינימום","הכוכב הבולט","הטבות לחברות","קישור לפתיחת חשבון","להציג בדף","לוגו"],
       ["ברוקר ישראלי","[ברוקר ישראלי 1]","[עמלות]","[סכום]","מתחילות","[הטבות]","","כן"],
       ["ברוקר ישראלי","[ברוקר ישראלי 2]","[עמלות]","[סכום]","פעילות","[הטבות]","","כן"],
       ["ברוקר ישראלי","[ברוקר ישראלי 3]","[עמלות]","[סכום]","מתחילות ופעילות","[הטבות]","","כן"],
@@ -473,7 +475,7 @@
       var inner = "", tag = "", note = "";
       if (type === "המסלולים שלנו") {
         inner = '<div class="list">' + services.map(function (v) {
-          var link = clean(v[3]), meet = clean(v[6]), price = clean(v[2]), club = clean(v[7]), comm = clean(v[8]);
+          var link = leadForm(v[3], clean(v[0])), meet = clean(v[6]), price = clean(v[2]), club = clean(v[7]), comm = clean(v[8]);
           if (/^\d+$/.test(meet)) meet = meet === "1" ? "מפגש אחד" : meet + " מפגשים";
           var meta = (meet ? '<span class="m">' + esc(meet) + "</span>" : "") +
             (price ? '<span class="reg' + (club || comm ? " cut" : "") + '">' + esc(price) + "</span>" : "") +
@@ -481,7 +483,7 @@
             (club ? '<span class="club">לחברות המועדון: ' + esc(club) + "</span>" : "");
           return '<div class="list-row"><img src="' + icon(v[4]) + '" alt=""><div class="txt"><span class="t">' + esc(v[0]) +
             '</span><span class="s">' + esc(v[1]) + "</span>" + (meta ? '<span class="meta">' + meta + "</span>" : "") + "</div>" +
-            (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">לפרטים</a>' : "") + "</div>";
+            (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener" data-track-lead="' + esc(clean(v[0])) + '">הרשמי לפרטים ותיאום</a>' : "") + "</div>";
         }).join("") + "</div>";
       } else if (type === "חשבונות מסחר") {
         var groups = [];
@@ -492,13 +494,14 @@
         });
         inner = groups.map(function (g) {
           return '<div class="tgroup"><span class="tgroup-title">' + esc(g.name) + '</span><div class="tscroll"><table><thead><tr>' +
-            '<th scope="col">החברה</th><th scope="col">עמלות</th><th scope="col">הפקדת מינימום</th><th scope="col">מתאים לשלב</th><th scope="col">ההטבות לחברות</th><th scope="col"><span class="sr">פתיחת חשבון</span></th></tr></thead><tbody>' +
+            '<th scope="col">החברה</th><th scope="col">עמלות</th><th scope="col">הפקדת מינימום</th><th scope="col">הכוכב הבולט</th><th scope="col">ההטבות לחברות</th><th scope="col"><span class="sr">פתיחת חשבון</span></th></tr></thead><tbody>' +
             g.rows.map(function (r) {
               var link = clean(r[6]), lg = clean(r[8]);
               var logo = lg
                 ? '<span class="co-logo"><img src="' + esc(photoSrc(lg)) + '" alt="" loading="lazy" onerror="this.parentNode.className=\'co-logo empty\';this.parentNode.textContent=\'לוגו\'"></span>'
                 : '<span class="co-logo empty">לוגו</span>';
-              return '<tr><th scope="row"><span class="co">' + logo + "<span>" + esc(r[1]) + "</span></span></th><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td><td>" + esc(r[4]) +
+              return '<tr><th scope="row"><span class="co">' + logo + "<span>" + esc(r[1]) + "</span></span></th><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td><td>" +
+                (clean(r[4]) ? '<span class="star"><img src="assets/icon-star.png" alt="">' + esc(r[4]) + "</span>" : "") +
                 '</td><td class="b">' + esc(r[5]) + "</td><td>" +
                 (link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener" data-track-acct="' + esc(clean(r[1])) + '">לפתיחת חשבון</a>' : "") + "</td></tr>";
             }).join("") + "</tbody></table></div></div>";
